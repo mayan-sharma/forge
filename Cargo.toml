@@ -1,0 +1,20 @@
+[package]
+name = "forge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Only essential system interface crates
+libc = "0.2"  # For low-level system calls
+lazy_static = "1.4"  # For global static instances
+toml = "0.8"  # For configuration file parsing
+serde = { version = "1.0", features = ["derive"] }  # For serialization
+dirs = "5.0"  # For platform-specific directories
+
+[target.'cfg(unix)'.dependencies]
+# Unix terminal control
+nix = "0.27"
+
+[target.'cfg(windows)'.dependencies]
+# Windows console API
+winapi = { version = "0.3", features = ["consoleapi", "processenv", "winbase"] }
